@@ -1,0 +1,264 @@
+#:kivy 1.11.1
+
+<Intro3>:
+    name: "Intro3"
+
+    FloatLayout:
+
+        Label:
+            text: "Social Learning Task: IOIO"
+            size_hint: 0.1, 0.1
+            pos_hint: {"x": 0.45, "y": 0.9}
+
+        Button:
+            text: "Next"
+            size_hint: 0.3, 0.1
+            pos_hint: {"x": 0.7, "y": 0}
+            on_release:
+                root.manager.transition.direction = "left"
+                root.next()
+
+        Label:
+            text: "Each round, there will be a binary lottery where either BLUE or GREEN \n will be drawn. You must click either the BLUE or GREEN button to predict what \n you think will be drawn. A popup will indicate if you are correct (+1 \n point) or incorrect (-1 point). Click anywhere to dismiss the popups."
+            text_size: self.width, None
+            size_hint: 1, None
+            padding: 50, 50
+            pos_hint: {"x": 0, "y": 0.5}
+
+<Intro2>:
+    name: "Intro2"
+
+    FloatLayout:
+
+        Label:
+            text: "Social Learning Task: IOIO"
+            size_hint: 0.1, 0.1
+            pos_hint: {"x": 0.45, "y": 0.9}
+
+        Button:
+            text: "Next"
+            size_hint: 0.3, 0.1
+            pos_hint: {"x": 0.7, "y": 0}
+            on_release:
+                root.manager.transition.direction = "left"
+                root.next()
+
+        Label:
+            text: "The adviser always has more information about the result than you do \n (you only know the probability based on the pie chart shown). However, \n the adviser does not have all of the information. They can sometimes \n give incorrect advice  while trying to help you."
+            text_size: self.width, None
+            size_hint: 1, None
+            padding: 50, 50
+            pos_hint: {"x": 0, "y": 0.5}
+
+<Intro1>:
+    name: "Intro1"
+
+    FloatLayout:
+
+        Label:
+            text: "Social Learning Task: IOIO"
+            size_hint: 0.1, 0.1
+            pos_hint: {"x": 0.45, "y": 0.9}
+
+        Button:
+            text: "Next"
+            size_hint: 0.3, 0.1
+            pos_hint: {"x": 0.7, "y": 0}
+            on_release:
+                root.manager.transition.direction = "left"
+                root.next()
+
+        Label:
+            text: "The study simulates everyday situations in which one must make a decision \n based on the advice of another or not. To do this, you will play a \n game in which you must make decisions based on the advice an adviser has \n given you (as indicated by the suggestion in the top left corner)."
+            text_size: self.width, None
+            size_hint: 1, None
+            padding: 50, 50
+            pos_hint: {"x": 0, "y": 0.5}
+
+<NewWindow>:
+    name: "new"
+
+    FloatLayout:
+            
+        Label:
+            text: "Social Learning Task: IOIO"
+            size_hint: 0.1, 0.1
+            pos_hint: {"x": 0.45, "y": 0.9}
+
+        Button:
+            text: "Start"
+            size_hint: 0.3, 0.1
+            pos_hint: {"x": 0.7, "y": 0}
+            on_release:
+                root.manager.transition.direction = "left"
+                root.use_bestinputs()
+                root.submit()
+
+        Label:
+            text: "You will also be asked what you believe the intention of the adviser is \n at random moments during the task. Please choose one of the following \n  three options: Helpful, Misleading or Random."
+            text_size: self.width, None
+            size_hint: 1, None
+            padding: 50, 50
+            pos_hint: {"x": 0, "y": 0.5}
+
+<ResultsWindow>:
+    name: "results"
+
+    GridLayout:
+        cols: 1
+        padding: 50, 50
+
+        Button:
+            text: "Kappa"
+            on_release: root.kappa()
+
+        Button:
+            text: "Omega"
+            on_release: root.omega2()
+
+        Button:
+            text: "M2"
+            on_release: root.m2()
+
+        Button:
+            text: "M3"
+            on_release: root.m3()
+
+        Button:
+            text: "Theta"
+            on_release: root.theta()
+
+        Button:
+            text: "Restart"
+            on_release: root.restart()
+
+<GameWindow>:
+    name: "game"
+
+    FloatLayout:
+
+        scorelbl: scorelbl
+        bluebtn: bluebtn
+        greenbtn: greenbtn
+        suggestion: suggestion
+        id: aud
+
+        Image:
+            id: suggestion
+            source: "black.png"
+            pos_hint: {"center_x": 0.5, "center_y": 0.3}
+
+        Image:
+            source: str(root.pie_chart)
+            size_hint: 0.5, 0.5
+            pos_hint: {"center_x": 0.5, "center_y": 0.6}
+            
+        Label: 
+            text: ('Round: ' + str(root.rounds) + '/100')
+            size_hint: 0.1, 0.1
+            pos_hint: {"center_x": 0.5, "y": 0.9}
+            
+        AudioButton:
+            id: bluebtn
+            text: "Blue"
+            background_color: 0, 0, 1, 1
+            on_press:
+                root.bluepressed()
+            size_hint: 0.3, 0.2
+            pos_hint: {"x": 0.1, "y": 0.1}
+                
+        AudioButton:
+            id: greenbtn
+            text: "Green"
+            background_color: 0, 1, 0, 1
+            on_press:
+                root.greenpressed()
+            size_hint: 0.3, 0.2
+            pos_hint: {"x": 0.6, "y": 0.1}
+            
+        Label:
+            id: scorelbl
+            text: str(root.score)
+            size_hint: 0.3, 0.1
+            pos_hint: {"x": 0.35, "y": 0}
+            
+        Button:
+            text: "Quit"
+            size_hint: 0.1, 0.1
+            pos_hint: {"x": 0, "y": 0}
+            on_release:
+                root.manager.transition.direction = "left"
+                root.quit_btn()
+
+
+        Button:
+            text: "Instructions"
+            size_hint: 0.1, 0.1
+            pos_hint: {"x": 0.9, "y": 0}
+            on_release:
+                root.revInstructions()
+
+<Warning>:
+
+    Label:
+        text: "Warning, exiting the game will reset your progress and you must input a new Subject ID. Are you sure you want to quit? Click anywhere to close popup"
+        text_size: self.size
+        pos_hint: {"x": 0, "y": 0.4}
+
+<Correct>:
+    Image:
+        source: "check.png"
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        allow_stretch: True
+        keep_ratio: True
+        size_hint_y: None
+        size_hint_x: None
+        width: self.parent.width
+        height: self.parent.width/self.image_ratio
+
+<Incorrect>:
+    Image:
+        source: "x.png"
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        allow_stretch: True
+        keep_ratio: True
+        size_hint_y: None
+        size_hint_x: None
+        width: self.parent.width
+        height: self.parent.width/self.image_ratio
+
+<Help>:
+
+    helpful: helpful
+    misleading: misleading
+    indifferent: indifferent
+
+    Label:
+        text: "How helpful is the advice?"
+        text_size: self.size
+        pos_hint: {"x": 0, "y": 0.9}
+
+    Button:
+        id: helpful
+        text: "Helpful"
+        size_hint: 0.3, 0.2
+        pos_hint: {"x": 0.3, "y": 0.6}
+        on_press:
+            root.press_helpful()
+
+    Button:
+        id: misleading
+        text: "Misleading"
+        size_hint: 0.3, 0.2
+        pos_hint: {"x": 0.3, "y": 0.35}
+        on_press:
+            root.press_misleading()
+
+    Button:
+        id: indifferent
+        text: "Indifferent"
+        size_hint: 0.3, 0.2
+        pos_hint: {"x": 0.3, "y": 0.1}
+        on_press:
+            root.press_indifferent()
+
