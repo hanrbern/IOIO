@@ -3645,7 +3645,7 @@ class GameWindow(Screen):
             return None
 
     def new(self):
-        man = IOManager(db.filename,'192.168.0.15')
+        man = IOManager(db.filename,'192.168.0.16')
         res.pvec = man.getResults()
         sm.current = "results"
 
